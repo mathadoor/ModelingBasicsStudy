@@ -2,7 +2,6 @@
 # when tossing a coin.
 
 import numpy as np
-import seaborn as sns
 import matplotlib.pyplot as plt
 import models
 from data_gen import bernoilli_coin, markov_coin
