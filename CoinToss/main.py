@@ -43,46 +43,69 @@ for j in range(len(NUM_FLIPS_RANGE)):
 
 # Plotting the results with mean with shaded standard deviation area
 fig, ax = plt.subplots(figsize=FIG_SIZE)
-ax.plot(NUM_FLIPS_RANGE, bernoulli_p_bd.mean(axis=1), alpha=0.5, color='blue', label='Bernoulli', linewidth = 1.0)
+ax.plot(NUM_FLIPS_RANGE, bernoulli_p_bd.mean(axis=1), alpha=0.5, color='blue', label='Bernoulli Model', linewidth = 1.0)
 ax.fill_between(NUM_FLIPS_RANGE,
                 bernoulli_p_bd.mean(axis=1) - bernoulli_p_bd.std(axis=1),
                 bernoulli_p_bd.mean(axis=1) + bernoulli_p_bd.std(axis=1),
                 color='#0000bb',
                 alpha=0.1)
-ax.plot(NUM_FLIPS_RANGE, markov_p_bd.mean(axis=1), alpha=0.5, color='red', label='Markov', linewidth = 1.0)
+ax.plot(NUM_FLIPS_RANGE, markov_p_bd.mean(axis=1), alpha=0.5, color='red', label='Markov Model', linewidth = 1.0)
 ax.fill_between(NUM_FLIPS_RANGE,
                 markov_p_bd.mean(axis=1) - markov_p_bd.std(axis=1),
                 markov_p_bd.mean(axis=1) + markov_p_bd.std(axis=1),
                 color='#bb0000',
                 alpha=0.1)
 ax.axhline(y=P, color='black', linestyle='--', label='True value')
-ax.set_xlabel('Number of tosses')
+ax.set_xlabel('Number of tosses/Dataset')
 ax.set_ylabel('Probability of getting a head')
-ax.set_title('Bernoulli data')
+ax.set_title('Data Generated with Bernoulli coin')
 ax.set_xlim([NUM_FLIPS_RANGE[0], NUM_FLIPS_RANGE[-1]])
 ax.set_ylim([0, 1])
 ax.legend(loc='best')
 plt.savefig('plots/bernoulli_data.png')
 
 fig, ax = plt.subplots(figsize=FIG_SIZE)
-ax.plot(NUM_FLIPS_RANGE, bernoulli_p_md.mean(axis=1), alpha=0.5, color='blue', label='Bernoulli', linewidth = 1.0)
+ax.plot(NUM_FLIPS_RANGE, bernoulli_p_md.mean(axis=1), alpha=0.5, color='blue', label='Bernoulli Model', linewidth = 1.0)
 ax.fill_between(NUM_FLIPS_RANGE,
                 bernoulli_p_md.mean(axis=1) - bernoulli_p_md.std(axis=1),
                 bernoulli_p_md.mean(axis=1) + bernoulli_p_md.std(axis=1),
                 color='#0000bb',
                 alpha=0.1)
-ax.plot(NUM_FLIPS_RANGE, markov_p_md.mean(axis=1), alpha=0.5, color='red', label='Markov', linewidth = 1.0)
+ax.plot(NUM_FLIPS_RANGE, markov_p_md.mean(axis=1), alpha=0.5, color='red', label='Markov Model', linewidth = 1.0)
 ax.fill_between(NUM_FLIPS_RANGE,
                 markov_p_md.mean(axis=1) - markov_p_md.std(axis=1),
                 markov_p_md.mean(axis=1) + markov_p_md.std(axis=1),
                 color='#bb0000',
                 alpha=0.1)
 ax.axhline(y=P, color='black', linestyle='--', label='True value')
-ax.set_xlabel('Number of tosses')
+ax.set_xlabel('Number of tosses/Dataset')
 ax.set_ylabel('Probability of getting a head')
-ax.set_title('Markov data')
+ax.set_title('Data Generated with Markov coin')
 ax.set_xlim([NUM_FLIPS_RANGE[0], NUM_FLIPS_RANGE[-1]])
 ax.set_ylim([0, 1])
 ax.legend(loc='best')
 plt.savefig('plots/markov_data.png')
 
+# Plotting the results of delta
+fig, ax = plt.subplots(figsize=FIG_SIZE)
+ax.plot(NUM_FLIPS_RANGE, markov_delta_bd.mean(axis=1), alpha=0.5, color='red', label='Bernoulli Coin', linewidth = 1.0)
+ax.fill_between(NUM_FLIPS_RANGE,
+                markov_delta_bd.mean(axis=1) - markov_delta_bd.std(axis=1),
+                markov_delta_bd.mean(axis=1) + markov_delta_bd.std(axis=1),
+                color='#bb0000',
+                alpha=0.1)
+ax.plot(NUM_FLIPS_RANGE, markov_delta_md.mean(axis=1), alpha=0.5, color='blue', label='Markov Coin', linewidth = 1.0)
+ax.fill_between(NUM_FLIPS_RANGE,
+                markov_delta_md.mean(axis=1) - markov_delta_md.std(axis=1),
+                markov_delta_md.mean(axis=1) + markov_delta_md.std(axis=1),
+                color='#0000bb',
+                alpha=0.1)
+ax.axhline(y=0, color='red', linestyle='--', label='True value for Bernoulli coin')
+ax.axhline(y=DELTA, color='black', linestyle='--', label='True value for Markov coin')
+ax.set_xlabel('Number of tosses/Dataset')
+ax.set_ylabel(r'$\delta$')
+ax.set_title('$\delta$ for Bernoulli and Markov coins')
+ax.set_xlim([NUM_FLIPS_RANGE[0], NUM_FLIPS_RANGE[-1]])
+ax.set_ylim([-0.5, 0.5])
+ax.legend(loc='best')
+plt.savefig('plots/delta.png')

@@ -1,4 +1,4 @@
-# ModelingBasicsStudy
+# Modeling Basics Study
 A repository containing code to supplement my blog posts related to bias variance tradeoff.
 ### General Structure
 The general structure of the repository is as follows:  
@@ -29,9 +29,9 @@ conda install numpy
 conda install matplotlib
 ```
 ### Running Experiments
-#### Step 1 - Navigate to the Coin Toss directory
+#### Step 1 - Navigate to the CoinToss directory
 ```commandline
-cd "ModelingBasicsStudy/Coin Toss"
+cd "ModelingBasicsStudy/CoinToss"
 ```
 #### Step 2 - Update the parameters in `main.py` to your liking
 ```python

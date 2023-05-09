@@ -35,8 +35,8 @@ def markov_chain_mle(data):
     max_delta = 0
     for pr in np.linspace(0.01, 0.99, 100):
         p_s = np.log(pr) if data[0] == 1 else np.log(1 - pr)
-        for delta in np.linspace(0, 0.99, 100):
-            if pr + delta >= 1 or pr - delta <= 0:
+        for delta in np.linspace(-0.99, 0.99, 100):
+            if pr + delta >= 1 or pr - delta <= 0 or pr + delta <= 0 or pr - delta >= 1:
                 continue
             prob = p_s + m * np.log(pr + delta) + p * np.log(pr - delta) + n * np.log(1 - (pr + delta)) + q*np.log(1 - (pr - delta))
             if prob > max_prob:
