@@ -3,11 +3,13 @@ if [ -f "$(dirname "$0")/drug_consumption.csv" ]; then
     read -p "Data file already exists. Would you like to clean and redownload the data? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Cleaning and redownloading data..."
         rm "$(dirname "$0")/drug_consumption.csv"
-    else
-      wget -P "$(dirname "$0")" https://archive.ics.uci.edu/ml/machine-learning-databases/00373/drug_consumption.data
-      mv "$(dirname "$0")/drug_consumption.data" "$(dirname "$0")/drug_consumption.csv"
+        wget -P "$(dirname "$0")" https://archive.ics.uci.edu/ml/machine-learning-databases/00373/drug_consumption.data
+        mv "$(dirname "$0")/drug_consumption.data" "$(dirname "$0")/drug_consumption.csv"
     fi
+else
+    echo "Downloading data..."
+    wget -P "$(dirname "$0")" https://archive.ics.uci.edu/ml/machine-learning-databases/00373/drug_consumption.data
+    mv "$(dirname "$0")/drug_consumption.data" "$(dirname "$0")/drug_consumption.csv"
 fi
-wget -P "$(dirname "$0")" https://archive.ics.uci.edu/ml/machine-learning-databases/00373/drug_consumption.data
-mv "$(dirname "$0")/drug_consumption.data" "$(dirname "$0")/drug_consumption.csv"
